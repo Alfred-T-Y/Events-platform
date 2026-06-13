@@ -53,7 +53,7 @@
   --color-border-dark: var(--color-border-dark);
   --color-dark-100: var(--color-dark-100);
   --color-dark-200: var(--color-dark-200);
-  --font-schibsted-grotesk: var(--font-schibsted-grotesk);
+  --font-robot: var(--font-roboto-condensed);
   --font-martian-mono: var(--font-martian-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -124,7 +124,7 @@
   }
 
   h3 {
-    @apply font-schibsted-grotesk text-2xl font-bold;
+    @apply font-robot text-2xl font-bold;
   }
 
   ul {
@@ -168,7 +168,7 @@
   }
 
   .events {
-    @apply grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1;
+    @apply list-none grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1;
   }
 
   #event-card {
@@ -231,7 +231,7 @@
     }
 
     h2 {
-      @apply font-schibsted-grotesk text-2xl font-bold;
+      @apply font-robot text-2xl font-bold;
     }
 
     p {

@@ -3,6 +3,7 @@ import { Roboto_Condensed, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import LightRays from '@/components/LightRays';
+import Navbar from "@/components/Navbar";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -24,9 +25,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("min-h-screen", "antialiased", robot.variable, "font-sans", geist.variable)}
+      className={cn("min-h-screen", "antialiased", robot.variable, "font-sans", robot.variable)}
     >
       <body className="min-h-full flex flex-col">
+
+        <Navbar/>
+
         <div className="absolute inset-0 top-0 z-[-1]">
           <LightRays
             raysOrigin="top-center-offset"
