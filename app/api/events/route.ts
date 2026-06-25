@@ -2,8 +2,12 @@ import connectDB from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import Event from "@/database/event.model";
 import { v2 as cloudinary } from 'cloudinary';
+import { create } from "domain";
 
 export async function POST(req: NextRequest) {
+
+    let imageId;
+
     try {
         await connectDB();
 
@@ -32,6 +36,7 @@ export async function POST(req: NextRequest) {
         });
 
         event.image = (uploadedImage as { secure_url: string }).secure_url;
+        imageId = (uploadedImage as { public_id: string }).public_id;
 
         const createdEvent = await Event.create(event);
 
@@ -39,6 +44,21 @@ export async function POST(req: NextRequest) {
 
     } catch (e) {
         console.error(e);
+        if (imageId) {
+            await cloudinary.uploader.destroy(imageId);
+        }
         return NextResponse.json({ message: 'Event creation failed', error: e instanceof Error ? e.message : 'Unknown' }, { status: 500 });
+    }
+}
+
+
+export async function GET() {
+    try {
+        await connectDB();
+        const events = await Event.find().sort({ createdAt: -1 });
+        return NextResponse.json({ message: 'Events fetched successfully', events }, { status: 200 });
+    } catch (e) {
+        console.error(e);
+        return NextResponse.json({ message: 'Events fetching failed', error: e }, { status: 500 });
     }
 }
